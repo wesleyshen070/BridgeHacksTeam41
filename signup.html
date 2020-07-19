@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
+
 <head>
+	
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -13,15 +15,18 @@
 
 <html>
 <head>
+	
+
 	<title>
 		Signup page
 	</title>
 </head>
+
 <body class="loginbody">
 	<div style="margin-bottom: 80px; height: 950px; top: 80%" class="loginbox">
 		<img src="Images/login.png" class="avatar">
 		<h1 class="loginhead">Please create an account to continue</h1>
-		<form name="login" >
+		<form name="login"  onsubmit="check(login)">
 			<!-- <data-netlify="true"> -->
 			<p>First name</p>
 			<input type="text" name="first" placeholder="Enter first name"/>
@@ -29,6 +34,8 @@
 			<input type="text" name="last" placeholder="Enter last name"/>
 			<p>Username</p>
 			<input type="text" name="userid" placeholder="Enter Username"/>
+			<p>email</p>
+			<input type="email" name="em" placeholder="Email"/>
 			<p>Password</p>
 			<input type="password" name="pswrd" placeholder="Enter Password"/>
 			<p>Re-enter password</p>
@@ -44,30 +51,78 @@
 				<option  value="Creator">Create (promote your own startup)</option>
 			</select>
 
-			<input style="margin: 20px 20px 20px 0px" type="submit" onclick="check(this.form)" value="Create account"/>
+			<input style="margin: 20px 20px 20px 0px"  type="submit"  value="Create account"/>
 			<a href="outhome.html">Return to home</a><br>
 			<a href="Login.html">Sign in to an existing account</a>
 		</form>
 	</div>
+	<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="/__/firebase/7.16.1/firebase-app.js"></script>
+
+  <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+  <script src="/__/firebase/7.16.1/firebase-analytics.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="/__/firebase/7.16.1/firebase-auth.js"></script>
+  <script src="/__/firebase/7.16.1/firebase-firestore.js"></script>
+
+  <!-- Initialize Firebase -->
+  <script src="/__/firebase/init.js"></script>
+  <script> const firebaseConfig = {
+	apiKey: "AIzaSyCKdjbPgtgLTpe6pK1uBD-3NZfmyeue13A",
+	authDomain: "equinox-efd57.firebaseapp.com",
+	databaseURL: "https://equinox-efd57.firebaseio.com",
+	projectId: "equinox-efd57",
+	storageBucket: "equinox-efd57.appspot.com",
+	messagingSenderId: "789410329387",
+	appId: "1:789410329387:web:e408695bc9beaf50924b6e",
+	measurementId: "G-JW19J9NTPX"
+	  };
+   </script>
+	
 </body>
 
 <script>
 function check(form){
 
+	
+
+	/*
 	localStorage.setItem("user", form.userid.value);
 	localStorage.setItem("pass", form.pswrd.value);
 	localStorage.setItem("first", form.first.value);
 	localStorage.setItem("last", form.last.value);
 	localStorage.setItem("abt", form.abt.value);
 	localStorage.setItem("skill", form.skill.value);
-	localStorage.setItem("option", form.option.value);
+	localStorage.setItem("option", form.option.value); 
+	*/
 
 	if(form.pswrd.value == form.pswrd2.value){
-		window.location = ('inhome.html')
+		
+		firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == 'auth/weak-password') {
+          alert('The password is too weak.');
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+
+
+
+		location.href = 'inHome.html';
 	}
 	else{
 		alert("Error: Password does not match!");
 	}
+	
 }
 </script>
 </html>
