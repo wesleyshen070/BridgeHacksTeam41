@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="styles.css">
+  <title>Sign up</title>
+</head>
+
+<html>
+<head>
+	<title>
+		Signup page
+	</title>
+</head>
+<body class="loginbody">
+	<div style="margin-bottom: 80px; height: 950px; top: 80%" class="loginbox">
+		<img src="Images/login.png" class="avatar">
+		<h1 class="loginhead">Please create an account to continue</h1>
+		<form name="login" data-netlify="true">
+			<p>First name</p>
+			<input type="text" name="first" placeholder="Enter first name"/>
+			<p>Last name</p>
+			<input type="text" name="last" placeholder="Enter last name"/>
+			<p>Username</p>
+			<input type="text" name="userid" placeholder="Enter Username"/>
+			<p>Password</p>
+			<input type="password" name="pswrd" placeholder="Enter Password"/>
+			<p>Re-enter password</p>
+			<input type="password" name="pswrd2" placeholder="Re-enter Password"/>
+			<p>About me</p>
+			<input type="text" name="abt" placeholder="100 words or less"/>
+			<p>Skills and interests</p>
+			<input type="text" name="skill" placeholder="50 words or less"/>
+
+
+			<select style="margin: 5px 5px 5px -13px"name="option">
+				<option  value="Explorer" >Explore (freelance for other startups)</option>
+				<option  value="Creator">Create (promote your own startup)</option>
+			</select>
+
+			<input style="margin: 20px 20px 20px 0px" type="submit" onclick="check(this.form)" value="Create account"/>
+			<a href="outhome.html">Return to home</a><br>
+			<a href="Login.html">Sign in to an existing account</a>
+		</form>
+	</div>
+</body>
+
+<script>
+function check(form){
+
+	localStorage.setItem("user", form.userid.value);
+	localStorage.setItem("pass", form.pswrd.value);
+	localStorage.setItem("first", form.first.value);
+	localStorage.setItem("last", form.last.value);
+	localStorage.setItem("abt", form.abt.value);
+	localStorage.setItem("skill", form.skill.value);
+	localStorage.setItem("option", form.option.value);
+
+	if(form.pswrd.value == form.pswrd2.value){
+		window.location = ('inhome.html')
+	}
+	else{
+		alert("Error: Password does not match!");
+	}
+}
+</script>
+</html>
